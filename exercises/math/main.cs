@@ -17,5 +17,9 @@ class main{
 		Write($"gamma(2): {sfuncs.gamma(2)}\n");
 		Write($"gamma(3): {sfuncs.gamma(3)}\n");
 		Write($"gamma(10): {sfuncs.gamma(10)}\n");
+		Write($"lngamma(1): {sfuncs.lngamma(1)}\n");
+                Write($"lngamma(2): {sfuncs.lngamma(2)}\n");
+                Write($"lngamma(3): {sfuncs.lngamma(3)}\n");
+		Write($"lngamma(10): {sfuncs.lngamma(10)}\n");
 	}
 }
