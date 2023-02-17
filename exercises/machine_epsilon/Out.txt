@@ -1,0 +1,6 @@
+sumA-1 = 0.000000e+000 should be 1.110223e-010
+sumB-1 = 1.110223e-010 should be 1.110223e-010
+d1=7.999999999999999e-001
+d2=8.000000000000000e-001
+d1==d2 ? => False
+Are they approximately equal? => True

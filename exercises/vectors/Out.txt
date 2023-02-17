@@ -1,0 +1,8 @@
+u = 1 2 3
+v = 2 3 4
+2*v = 4 6 8
+u.dot(v) = 20
+vec.dot(u,v) = 20
+u.cross(v) = -1 2 -1
+vec.cross(u,v) = -1 2 -1
+-v = -2 -3 -4
