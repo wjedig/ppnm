@@ -1,0 +1,34 @@
+nterms=200000000 nthreads=1
+i = 0 x.a = 1 x.b = 200000001
+master thread: waiting for other threads...
+total sum = 19.6910435919144
+real 0.86
+user 0.53
+sys 0.05
+nterms=200000000 nthreads=2
+i = 0 x.a = 1 x.b = 100000001
+i = 1 x.a = 100000001 x.b = 200000001
+master thread: waiting for other threads...
+total sum = 19.6910435919123
+real 0.63
+user 0.56
+sys 0.04
+nterms=200000000 nthreads=3
+i = 0 x.a = 1 x.b = 66666667
+i = 1 x.a = 66666667 x.b = 133333334
+i = 2 x.a = 133333334 x.b = 200000001
+master thread: waiting for other threads...
+total sum = 19.691043591912
+real 0.55
+user 0.56
+sys 0.04
+nterms=200000000 nthreads=4
+i = 0 x.a = 1 x.b = 50000001
+i = 1 x.a = 50000001 x.b = 100000001
+i = 2 x.a = 100000001 x.b = 150000001
+i = 3 x.a = 150000001 x.b = 200000001
+master thread: waiting for other threads...
+total sum = 19.691043591913
+real 0.50
+user 0.57
+sys 0.03

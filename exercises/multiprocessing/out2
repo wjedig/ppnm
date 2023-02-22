@@ -1,0 +1,7 @@
+nterms=2000000000 nthreads=1
+i = 0 x.a = 1 x.b = 2000000001
+master thread: waiting for other threads...
+total sum = 21.9936286826628
+real 6.19
+user 5.98
+sys 0.01
