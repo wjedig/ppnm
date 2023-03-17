@@ -1,7 +1,7 @@
 Gamma.svg: gamma.gpi gamma.data factorials.data
 	gnuplot $<
 gamma.data : main.exe
-	mono $< > $@
+	mono $< >$@
 
 
 main.exe : main.cs sfuns.dll

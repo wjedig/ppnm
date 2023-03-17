@@ -1,4 +1,9 @@
 #RM = rm ---force
+DLLS = $(addprefix -reference:,$(filter %.dll,$^))
+CODE = $(filter %.cs,$^)
+MKEXE = mcs -target:exe -out:$@ $(DLLS) $(CODE)
+MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
+
 
 Out.txt: main.exe Makefile
 	mono main.exe > Out.txt
