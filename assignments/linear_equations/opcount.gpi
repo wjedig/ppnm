@@ -1,0 +1,14 @@
+set terminal svg background "white"
+set key left
+set xlabel "Matrix Size"
+set ylabel "Time to compute"
+set tics out
+set title "QR-factorization Operation Count"
+set output "opcount.svg"
+
+f(x) = a*x**3 + b
+fit f(x) 'out.times.data' via 'start.par'
+
+plot [0:800][0:7.5] "out.times.data" using ($1+1):($2) with points title "experiment"\
+	,f(x) with lines title "fit" \
+	
