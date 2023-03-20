@@ -5,19 +5,39 @@ MKEXE = mcs -target:exe -out:$@ $(DLLS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 MATLIB = $(HOME)/repos/ppnm/matlib
 
-Out.txt: main.exe Makefile
+all : Out.testA.txt dr.svg rmax.svg
+
+Out.testA.txt: main.exe Makefile
 	mono main.exe > Out.txt
 
 main.exe : main.cs matlib.dll
 	$(MKEXE)
 
-matlib.dll : $(MATLIB)/linalg/vector.cs  $(MATLIB)/linalg/matrix.cs evd.cs
+dr.svg: dr.gpi out.dr.data
+	gnuplot $<
+
+rmax.svg: rmax.gpi out.rmax.data
+	gnuplot $<
+
+out.dr.data : main.exe
+	>$@
+	for N in $$(seq 0.05 0.05 3); do \
+		mono $< -plotdr -rmax:10 -dr:$$N 1>>$@ 2>err ;\
+	done
+
+out.rmax.data : main.exe
+	>$@
+	for N in $$(seq 1 0.1 10); do \
+		mono $< -plotrmax -rmax:$$N -dr:0.1 1>>$@ 2>err ;\
+	done
+
+matlib.dll : evd.cs $(MATLIB)/linalg/vector.cs  $(MATLIB)/linalg/matrix.cs
 	$(MKLIB)
 
 .PHONEY : clean test
 
 clean:
-	$(RM) *.exe *.dll [Oo]ut* log*
+	$(RM) *.exe *.dll [Oo]ut* log* *.data err
 test: 
 	echo $(RM)
 

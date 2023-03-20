@@ -35,7 +35,7 @@ out.times.data : main.exe
 .PHONEY : clean test
 
 clean:
-	$(RM) *.exe *.dll [Oo]ut* log* err* *.data
+	$(RM) *.exe *.dll [Oo]ut* log* err* *.data *.log
 test: 
 	echo $(RM)
 
