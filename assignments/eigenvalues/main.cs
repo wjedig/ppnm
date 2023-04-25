@@ -43,8 +43,8 @@ public static class Test{
 			D[i,i] = w[i];
 		}
 		matrix VTAV = (V.T)*A*V;
-		WriteLine($"VTAV == D : {VTAV.approx(D)}");
-		if(trace){VTAV.print("VTAV = "); D.print("D = ");}
+		WriteLine($"VTAV == D : {VTAV.approx(D,acc:1e-3,eps:0)}");
+		if(trace){VTAV.print("VTAV = ",format:"{0,20:g15}"); D.print("D = ",format:"{0,20:g15}");}
 		matrix VDVT = V*D*(V.T);
 		WriteLine($"VDVT == A : {VDVT.approx(A)}");
 		matrix VTV = (V.T)*V;
@@ -58,6 +58,17 @@ public static class Test{
 		(vector e, matrix V) = jacobi.cyclic(ham);
 		e.print("Eigenvalues given by:");
 		V.print("With corresponding Eigenvectors given by:");
+	}
+	public static void testB_plot(double rmax, double dr){
+		matrix ham = Utils.build_hamiltonian(rmax, dr);
+		(vector e, matrix V) = jacobi.cyclic(ham);
+		for(int i=0 ; i<V.size2 ; i++){
+			Write($"{i*dr} ");
+			for(int j=0 ; j<V.size1 ; j++){
+				Write($"{V[j][i]} ");
+			}
+			Write("\n");
+		}
 	}
 	public static void testB_rmax(double rmax, double dr){
 		matrix ham = Utils.build_hamiltonian(rmax, dr);
@@ -75,8 +86,8 @@ class main{
 	public static void Main(string[] args){
 		double rmax = 10;
 		double dr = 0.3;
-		int size = 10;
-		double scale = 100.0;
+		int size = 30;
+		double scale = 1.0;
 		bool trace = false;
 		foreach(string param in args){ // set all params
 			string[] words = param.Split(":");
@@ -91,6 +102,8 @@ class main{
 			if(run == "-hydrogen"){Test.testB_eigenvals(rmax, dr);}
 			if(run == "-plotrmax"){Test.testB_rmax(rmax, dr);}
 			if(run == "-plotdr"){Test.testB_dr(rmax, dr);}
+			if(run == "-plotfuncs"){Test.testB_plot(rmax, dr=0.1);}
+
 
 		}
 	}

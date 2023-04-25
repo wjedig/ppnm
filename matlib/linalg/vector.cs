@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using static System.Math;
 using static System.Console;
+using System.Collections.Generic;
 
 namespace linalg{
 public partial class vector{
@@ -18,6 +19,7 @@ public double this[int i]{
 
 public vector(int n){data=new double[n];}
 public vector(double[] a){data=a;}
+public vector(List<double> a){data = a.ToArray();}
 public vector(double a)
 	{ data = new double[]{a}; }
 public vector(double a, double b)

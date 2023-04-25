@@ -1,0 +1,21 @@
+set terminal svg background "white"
+set termoption dash
+#set linetype 3 dt 2
+set key left
+set xlabel "delta r"
+set ylabel "Lowest eigenvalue"
+set tics out
+set title "E0 vs dr parameter"
+set output "eigenfuncs.svg"
+
+E1(x) = exp(-x)
+E20(x) = (1-x/2)*exp(-x/2)
+E21(x) = (x/2)*exp(-x)
+
+plot [0:10][-0.5:0.5] "out.eigenfuncs.data" using 1:2 with lines title "E1-calc",\
+		"out.eigenfuncs.data" using 1:3 with lines title "E2-calc",\
+		"out.eigenfuncs.data" using 1:4 with lines title "E3-calc",\
+		E1(x) with lines dt 2 title "E1-theory",\
+		E20(x) with lines dt 2 title "E20-theory",\
+		E21(x) with lines dt 2 title "E21-theory"
+	

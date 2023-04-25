@@ -1,0 +1,14 @@
+set terminal svg background "white"
+set key left
+set xlabel "time (days)"
+set ylabel "Activity of ThX (relative units)"
+set tics out
+set title "Radioactive decay of ThX"
+set output "decay.svg"
+
+load "out.decayfit.par"
+f(x) = a - b*x 
+
+plot [0:16][0:6] "out.lndecay.data" u 1:2:3 w yerr title "experiment",\
+	f(x) with lines title "fit"
+	

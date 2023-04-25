@@ -10,8 +10,11 @@ LINALG := $(shell find $(MATLIB)/linalg -name '*.cs')
 Out.txt: main.exe Makefile
 	mono main.exe > Out.txt
 
-main.exe : main.cs # + any library.dll files
-	mcs -target:exe -out:$@ $(filter %.cs,$^) $(addprefix -reference:,$(filter %.dll,$^))
+main.exe : main.cs matlib.dll
+	$(MKEXE)
+
+matlib.dll : $(LINALG)
+	$(MKLIB)
 
 .PHONEY : clean test
 
