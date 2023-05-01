@@ -6,9 +6,19 @@ MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 MATLIB = $(HOME)/repos/ppnm/matlib
 LINALG := $(shell find $(MATLIB)/linalg -name '*.cs')
 
+all: OutA.txt linspline.svg OutB.txt
 
-Out.txt: main.exe Makefile
-	mono main.exe > Out.txt
+OutA.txt: main.exe Makefile
+	mono main.exe -A < input.A.txt > $@
+
+Out.plot.data: main.exe Makefile
+	mono main.exe -plot < input.A.txt > $@
+
+OutB.txt: main.exe Makefile
+	mono main.exe -B > $@
+
+linspline.svg: linspline.gpi Out.plot.data
+	gnuplot $<
 
 main.exe : main.cs matlib.dll
 	$(MKEXE)
@@ -16,7 +26,7 @@ main.exe : main.cs matlib.dll
 matlib.dll : $(LINALG)
 	$(MKLIB)
 
-.PHONEY : clean test
+.PHONY : all clean test
 
 clean:
 	$(RM) *.exe *.dll [Oo]ut* log*

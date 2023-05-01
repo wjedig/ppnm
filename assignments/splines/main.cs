@@ -88,11 +88,37 @@ class main{
 	public static void Main(string[] args){
 		foreach(string run in args){
 			if(run=="-A"){
-				double[] xs = {0,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0}, ys = {1,2,3,2,4,7,2,3,6,4,5};
-				// double[] xs = {0,0.6,1.2,1.8}, ys = {1,2,3,2};
-				vector xsvec = new vector(xs), ysvec = new vector(ys);
+				vector xsvec = new vector(11), ysvec = new vector(11);
+				int i = 0;
+				for(string line=In.ReadLine(); line != null; line=In.ReadLine()){
+					string[] vals = line.Split(" ");
+					xsvec[i] = double.Parse(vals[0]);
+					ysvec[i] = double.Parse(vals[1]);
+					//WriteLine($"{xsvec[i]} {ysvec[i]}");
+					i++;
+				}
 				double integ = linspline.linterpInteg(xsvec, ysvec, 1.7);
 				WriteLine($"integral = {integ}");
+			}
+			if(run=="-plot"){
+				vector xsvec = new vector(11), ysvec = new vector(11);
+				int i = 0;
+				for(string line=In.ReadLine(); line != null; line=In.ReadLine()){
+					string[] vals = line.Split(" ");
+					xsvec[i] = double.Parse(vals[0]);
+					ysvec[i] = double.Parse(vals[1]);
+					//WriteLine($"{xsvec[i]} {ysvec[i]}");
+					i++;
+				}
+				int n = 100;
+				vector z_xs = new vector(n), z_ys = new vector(n);
+				double dxz = (xsvec[xsvec.size-1]-xsvec[0])/n;
+				for(i=0; i<n; i++){
+					z_xs[i] = dxz*i;
+					z_ys[i] = linspline.linterp(xsvec,ysvec,z_xs[i]);
+					WriteLine($"{z_xs[i]} {z_ys[i]}");
+				}
+				
 			}
 			if(run=="-B"){
 				vector xsvec = new vector("1,2,3,4,5"), ysvec = new vector(5);
@@ -117,7 +143,7 @@ class main{
 				WriteLine("For x = {1,2,3,4,5}, y = {1,4,9,16,25}");
 				b.print("b = ");
 				c.print("c = ");
-				WriteLine("These are also the results I got manually :D")	
+				WriteLine("These are also the results I got manually :D");	
 
 			}
 		// int x = Splines.binsearch(new vector(0.5,0.7,0.9,1.1), 0.8);
