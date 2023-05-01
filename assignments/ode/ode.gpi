@@ -1,0 +1,11 @@
+set terminal svg background "white"
+set key left
+set xlabel "xs (arbitrary units)"
+set ylabel "ys (arbitrary units)"
+set tics out
+set title "Several Differential Equations"
+set output "ODE_test.svg"
+
+
+plot [0:10][-5:5] "Out.ode1.data" u 1:2 title "y' = -y" w linespoints ,\
+		"Out.ode2.data" u 1:2 title "y''(x) = -y" w linespoints
