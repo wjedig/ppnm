@@ -1,0 +1,12 @@
+set terminal svg background "white"
+set key left
+set xlabel "x"
+set ylabel "y"
+set tics out
+set title "Error function"
+set output "Erf.svg"
+
+
+plot [-5:5][-1.5:1.5] "out.a.data" using 1:2 title "Error function" w lines, \
+			"erf_tab.data" using 1:2 title "Tabulated values" w points
+

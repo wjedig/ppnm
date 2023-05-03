@@ -7,13 +7,16 @@ MATLIB = $(HOME)/repos/ppnm/matlib
 LINALG := $(shell find $(MATLIB)/linalg -name '*.cs')
 GENLIST := $(shell find $(MATLIB)/genlist -name '*.cs')
 
-all: ode_test.svg ode_damp.svg
+all: ode_test.svg ode_damp.svg ode_planets.svg
 
 ode_test.svg : ode.gpi Out.ode1.data Out.ode2.data
 	gnuplot ode.gpi
 
 ode_damp.svg : damp.gpi Out.ode3.data
 	gnuplot damp.gpi
+
+ode_planets.svg : planets.gpi BData
+	gnuplot planets.gpi
 
 Out.ode1.data: main.exe
 	mono main.exe -A1 > $@
@@ -24,13 +27,16 @@ Out.ode2.data: main.exe
 Out.ode3.data: main.exe
 	mono main.exe -A3 > $@
 
+BData: main.exe
+	mono main.exe -B
+
 main.exe : main.cs matlib.dll# + any library.dll files
 	mcs -target:exe -out:$@ $(CODE) $(DLLS)
 
 matlib.dll : $(LINALG) $(GENLIST)
 	$(MKLIB)
 
-.PHONEY : clean test all
+.PHONEY : clean test all BData
 
 clean:
 	$(RM) *.exe *.dll [Oo]ut* log*
