@@ -1,0 +1,28 @@
+set terminal svg background "white" size 1000,800
+set key left
+set tics out
+set title "Convergence towards E0=-0.5"
+set output "Convergence.svg"
+
+set multiplot layout 2,2 \
+              margins 0.1,0.98,0.1,0.98 \
+              spacing 0.1,0.15
+
+E(x) = -0.5
+
+set xlabel "rmax"
+set ylabel "Value of E0" offset 3
+plot [3:7.5][-0.6:-0.4] "out.b.data" using 2:1 title "Convergence of rmax" w linespoints, \
+			E(x) w lines
+
+set xlabel "rmin"
+plot [0:0.2][-0.52:-0.48] "out.b.data" using 4:3 title "Convergence of rmin" w linespoints, \
+			E(x) w lines
+
+set xlabel "eps"
+plot [0.1:1][-0.51:-0.49] "out.b.data" using 6:5 title "Convergence of eps" w linespoints, \
+			E(x) w lines
+
+set xlabel "acc"
+plot [0.1:1][-0.51:-0.49] "out.b.data" using 8:7 title "Convergence of acc" w linespoints, \
+			E(x) w lines

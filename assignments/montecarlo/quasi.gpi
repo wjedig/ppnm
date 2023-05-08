@@ -1,0 +1,12 @@
+set terminal svg background "white"
+set key left
+set xlabel "No. of sampled points"
+set ylabel "Error"
+set tics out
+set title "Error as a function of sampling points, for Pseudo/Quasi random sampling"
+set output "Quasi.svg"
+
+
+plot [0:2e5][0:0.02] "out.b.data" using 1:2 title "Pseudorandom Error" w lines, \
+			"out.b.data" using 1:3 title "Quasirandom Error" w lines
+

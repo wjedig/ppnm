@@ -1,3 +1,4 @@
+namespace genlist{
 public class genlist<T>{
 	public T[] data;
 	public int size => data.Length;
@@ -15,4 +16,5 @@ public class genlist<T>{
 			System.Console.WriteLine(data[i]);
 		}
 	}
+}
 }

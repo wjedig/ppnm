@@ -1,0 +1,10 @@
+--- Estimating area of circle with 1e7 points ---
+Area calculated to be : 0.7853702
+Actual area: 0.785398163397448
+Error estimated to be : 0.000129832141225492
+Actual error: 2.79633974482607E-05
+--- Estimating area of crazy function from hw with 1e7 points ---
+Area calculated to be : 0.0371114125586509
+Actual area: 1.39320392968568
+Error estimated to be : 0.000339014670604118
+Actual error: 1.35609251712703

@@ -31,6 +31,10 @@ public static class QRGS{
 		}
 		return c;
 	}
+	public static vector solve(matrix A, vector b){
+		(matrix Q, matrix R) = decomp(A);
+		return solve(Q,R,b);
+	}
 	public static matrix inverse(matrix A, matrix Q = null, matrix R = null){
 		int n = A.size1;
 		matrix invA = new matrix(n,n);

@@ -1,0 +1,4 @@
+Area calculated to be : 0.785586
+Actual area: 0.785398163397448
+Error estimated to be : 0.000129784681917397
+Actual error: 0.000187836602551728
