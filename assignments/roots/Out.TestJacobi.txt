@@ -1,0 +1,12 @@
+--- Testing Jacobi Matrix for function f(x1,x2) ---
+
+f1(x) = x1+x2
+f2(x) = x1^2
+f3(x) = x2^2
+
+Testing for x =          2          4 
+
+J = 
+         1          1 
+         4          0 
+         0          8 

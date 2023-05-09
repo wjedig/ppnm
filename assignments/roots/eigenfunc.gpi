@@ -1,0 +1,18 @@
+set terminal svg background "white" size 1000,600 font "Helvetica,16"
+set key left
+set xlabel "r (Bohr radius)"
+set ylabel "E (Hartree)"
+set tics out
+set output "Eigenfunc.svg"
+
+set multiplot layout 1,2
+
+f(x) = x*exp(-x)
+
+set title "All iterations"
+plot [0:10][0:3] "out.b2all.data" u 1:2 title "Shooting Method" w points pt 5 ps 0.1,\
+		f(x) title "Theory" w lines
+
+set title "Final iteration"
+plot [0:10][0:0.6] "out.b2final.data" u 1:2 title "Shooting Method" w linespoints ,\
+		f(x) title "Theory" w lines

@@ -9,6 +9,7 @@ public static class jacobi{
 		vector fx = f(x);
 		int n = fx.size, m = x.size;
 		double dx = x.norm()*Pow(2.0,-26);
+		if(dx == 0) dx = Pow(2.0,-26);
 		matrix J = new matrix(n,m);
 		for(int i=0; i<m; i++){
 			vector newx = x.copy();
@@ -16,6 +17,19 @@ public static class jacobi{
 			for(int j=0; j<n; j++){
 				J[j,i] = (f(newx)[j] - fx[j])/dx;
 			}
+		}
+		return J;
+	}
+	public static vector numderiv(Func<vector,double> f, vector x){
+		double fx = f(x);
+		int n = x.size;
+		double dx = x.norm()*Pow(2.0,-26);
+		if(dx == 0) dx = Pow(2.0,-26);
+		vector J = new vector(n);
+		for(int i=0; i<n; i++){
+			vector newx = x.copy();
+			newx[i] += dx;
+			J[i] = (f(newx) - fx)/dx;
 		}
 		return J;
 	}

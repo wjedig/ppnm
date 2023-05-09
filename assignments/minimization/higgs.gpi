@@ -1,0 +1,14 @@
+set terminal svg background "white"
+set key left
+set xlabel "Signal (certain units)"
+set ylabel "Energy (GeV)"
+set tics out
+set title "Higgs Boson Data"
+set output "Higgs.svg"
+
+load "out.bparams.par"
+f(x) = A/((x-m)**2 + G**2/4)
+
+plot [101:159][-10:10] "higgs.data" u 1:2:3 w yerr title "experiment",\
+	f(x) with lines title "fit"
+	

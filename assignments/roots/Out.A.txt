@@ -1,0 +1,29 @@
+--- Testing Jacobi Matrix for function f(x) ---
+
+f1(x) = x^2-16
+f2(x) = x+4
+
+Initial guess:        -10 
+Root found at:         -4 
+Actual root: (-4)
+
+--- Testing Jacobi Matrix for function f(x1,x2) ---
+
+f1(x) = x1+x2-1
+f2(x) = x1^2-4
+f3(x) = x2^2-9
+
+Initial guess:         -1          1 
+Root found at:         -2          3 
+Actual root: (-2,3)
+
+--- Finding extrema of Rosenbruck's valley function---
+Derivative found to be: [-2(1-x)-400x(y-x^2)  ,  200(y-x^2)]
+
+Initial guess:        0.5        0.5 
+Root found at:      0.999      0.998 
+Actual root: (1.0,1.0)
+
+Initial guess:       -0.9        0.9 
+Root found at:      0.999      0.998 
+Actual root: (1.0,1.0)

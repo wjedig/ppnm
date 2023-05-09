@@ -40,6 +40,8 @@ class main{
 	public static double rmin = 0.0001;
 	public static double eps = 0.01;
 	public static double acc = 0.01;
+	public static genlist<double> xlist = null;
+	public static genlist<vector> ylist = null;
 
 	public static void Main(string[] args){
 		foreach(string run in args){
@@ -61,10 +63,46 @@ class main{
 			if(run == "-A"){		
 				A();
 			}//A
-			if(run=="-B:test"){
-				int c = 0;
+			if(run=="-B:eigenfunc"){
+				counter = 0;
+				xlist = new genlist<double>();
+				ylist = new genlist<vector>();
 				double Emin = B();
-				WriteLine($"Emin found to be {Emin} in {c} iterations");
+				WriteLine($"Emin found to be {Emin} in {counter} iterations");
+				WriteLine($"Writing data file with found eigenfunction...");
+				var outstream = new StreamWriter("out.b2all.data", append:false);
+				for(int i=0; i<ylist.size; i++){
+					vector y = ylist[i];
+					double x = xlist[i];
+					outstream.WriteLine($"{x} {y[0]}");
+				}
+				outstream.Close();
+				xlist = new genlist<double>();
+				ylist = new genlist<vector>();
+				Func<double,vector,vector> f = (double r, vector y) => {
+					vector yprime = new vector(2);
+					yprime[0] = y[1];
+					yprime[1] = -2.0*(Emin + 1.0/r)*y[0];
+					return yprime;
+				};
+				vector finit = new vector(rmin-rmin*rmin, 1.0 - 2.0*rmin);
+				vector yfinal = rkint.driver(
+						f: f,
+						a: rmin,
+						ya: finit,
+						b: rmax,
+						acc: acc,
+						eps: eps,
+						xlist: xlist,
+						ylist: ylist);
+				outstream = new StreamWriter("out.b2final.data", append: false);
+				for(int i=0; i<ylist.size; i++){
+					vector y = ylist[i];
+					double x = xlist[i];
+					outstream.WriteLine($"{x} {y[0]}");
+				}
+				outstream.Close();
+
 			}
 			if(run=="-B:plot"){
 				var outstream = new StreamWriter("out.b.data", append:false);
@@ -187,7 +225,9 @@ class main{
 				ya: finit,
 				b: rmax,
 				acc: acc,
-				eps: eps);
+				eps: eps,
+				xlist: xlist,
+				ylist: ylist);
 		yval[0] = yfinal[0];
 		return yval;
 	}
