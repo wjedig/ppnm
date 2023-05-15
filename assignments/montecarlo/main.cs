@@ -64,10 +64,9 @@ class main{
 			if(run=="-A"){
 				/* Checking the area of a circle with radius 1 */
 				Func<vector,double> f = (vector v) => (v.norm() <= 1.0) ? 1.0 : 0.0;
-				/* this is a quarter of a circle, so result should be pi/4 */
-				vector a = new vector(0.0,0.0);
+				vector a = new vector(-1.0,-1.0);
 				vector b = new vector(1.0,1.0);
-				double acc_area = PI/4.0;
+				double acc_area = PI;
 				double area, pred_err, acc_err;
 				var outstream = new StreamWriter("out.a.data",append:false);
 				int n = 1;
@@ -82,18 +81,39 @@ class main{
 				}while(n <= stop);
 				outstream.Close();
 				WriteLine($"--- Estimating area of circle with 1e7 points ---");
+				WriteLine($"\nCalculation by 'throwing'");
 				n = Convert.ToInt32(1e7);
 				(area, pred_err) = mc.plainmc(f,a,b,n);
 				WriteLine($"Area calculated to be : {area}");
 				WriteLine($"Actual area: {acc_area}");
 				WriteLine($"Error estimated to be : {pred_err}");
 				WriteLine($"Actual error: {Abs(acc_area-area)}");
-				WriteLine($"--- Estimating area of crazy function from hw with 1e7 points ---");
+				WriteLine($"\nCalculation by evaluating function value with spherical coordinates");
+				WriteLine($"This means evaluating f(r,phi) = r from r = phi = 0, to r = 1, phi = 2pi");
+				f = (vector v) => v[0];
+				a = new vector(0.0,0.0);
+				b = new vector(1.0,2.0*PI);
+				(area, pred_err) = mc.plainmc(f,a,b,n);
+				WriteLine($"Area calculated to be : {area}");
+				WriteLine($"Actual area: {acc_area}");
+				WriteLine($"Error estimated to be : {pred_err}");
+				WriteLine($"Actual error: {Abs(acc_area-area)}");
+				WriteLine($"\n\n--- Estimating volume of unit sphere ---");
+				f = (vector v) => v[0]*v[0]*Sin(v[2]);
+				a = new vector(0.0,0.0,0.0);
+				b = new vector(1.0,2.0*PI,PI);
+				acc_area = (4.0/3.0)*PI;
+				(area, pred_err) = mc.plainmc(f,a,b,n);
+				WriteLine($"Area calculated to be : {area}");
+				WriteLine($"Actual area: {acc_area} (4/3 pi)");
+				WriteLine($"Error estimated to be : {pred_err}");
+				WriteLine($"Actual error: {Abs(acc_area-area)}");
+				WriteLine($"\n\n--- Estimating area of crazy function from hw with 1e7 points ---");
 				f = (vector v) => {
 					double fval = Pow(PI,-3)*(1.0/(1.0-Cos(v[0])*Cos(v[1])*Cos(v[2])));
-					double norm = v.norm();
-					double inside = (norm<=fval) ? 1.0 : 0.0;
-					return inside;
+					//double norm = v.norm();
+					//double inside = (norm<=fval) ? 1.0 : 0.0;
+					return fval;
 				};
 				a = new vector(0.0,0.0,0.0);
 				b = new vector(PI,PI,PI);
@@ -123,10 +143,10 @@ class main{
 				double stop = 2e5;
 				int spacing = 1;
 				int sspacing = 1;
-				double area2, pred_err2, acc_err1, acc_err2;
+				double area2, acc_err1, acc_err2;
 				do{
 					(area, pred_err) = mc.plainmc(f,a,b,n);
-					(area2, pred_err2) = mc.quasimc(f,a,b,n);
+					(area2, _) = mc.quasimc(f,a,b,n);
 					acc_err1 = Abs(acc_area-area);
 					acc_err2 = Abs(acc_area-area2);
 					outstream.WriteLine($"{n} {acc_err1} {acc_err2}");
