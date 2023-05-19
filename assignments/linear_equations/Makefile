@@ -27,7 +27,7 @@ matlib.dll : $(MATLIB)/linalg/vector.cs  $(MATLIB)/linalg/matrix.cs $(MATLIB)/co
 
 out.times.data : main.exe
 	>$@
-	for N in $$(seq 20 20 800); do \
+	for N in $$(seq 100 100 800); do \
 		time --format "$$N %e" --output $@ --append \
 		mono $< -size:$$N 1>out 2>err ;\
 	done

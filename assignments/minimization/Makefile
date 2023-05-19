@@ -6,6 +6,7 @@ MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 MATLIB = $(HOME)/repos/ppnm/matlib
 LINALG := $(shell find $(MATLIB)/linalg -name '*.cs')
 GENLIST := $(shell find $(MATLIB)/genlist -name '*.cs')
+CALCULUS := $(shell find $(MATLIB)/calculus -name '*.cs')
 
 all: Out.A.txt Out.B.txt Higgs.svg
 
@@ -18,10 +19,13 @@ Out.B.txt out.bparams.par: main.exe Makefile
 Higgs.svg: higgs.gpi out.bparams.par higgs.data
 	gnuplot $<
 
-main.exe : main.cs minimization.cs matlib.dll
+main.exe : main.cs linalg.dll calculus.dll
 	$(MKEXE)
 
-matlib.dll : $(LINALG) $(GENLIST)
+linalg.dll : $(LINALG) $(GENLIST)
+	$(MKLIB)
+
+calculus.dll : linalg.dll $(CALCULUS)
 	$(MKLIB)
 
 .PHONEY : clean test all

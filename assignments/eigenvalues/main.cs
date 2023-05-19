@@ -35,7 +35,7 @@ public static class Utils{
 }
 
 public static class Test{
-	public static void testA(int n=10, double scale = 100.0, bool trace=false){
+	public static void testA(int n=10, double scale = 1.0, bool trace=false){
 		matrix A = Utils.make_sym_matrix(n,scale);
 		(vector w, matrix V) = jacobi.cyclic(A);
 		matrix D = new matrix(n,n);
@@ -65,7 +65,7 @@ public static class Test{
 		for(int i=0 ; i<V.size2 ; i++){
 			Write($"{i*dr} ");
 			for(int j=0 ; j<V.size1 ; j++){
-				Write($"{V[j][i]} ");
+				Write($"{V[j][i]/Sqrt(dr)} ");
 			}
 			Write("\n");
 		}
@@ -102,7 +102,7 @@ class main{
 			if(run == "-hydrogen"){Test.testB_eigenvals(rmax, dr);}
 			if(run == "-plotrmax"){Test.testB_rmax(rmax, dr);}
 			if(run == "-plotdr"){Test.testB_dr(rmax, dr);}
-			if(run == "-plotfuncs"){Test.testB_plot(rmax, dr=0.1);}
+			if(run == "-plotfuncs"){Test.testB_plot(rmax=40, dr=0.08);}
 
 
 		}

@@ -5,9 +5,10 @@ using linalg;
 
 namespace calculus{
 public static class min{
+	public static double minlambda = Pow(2,-20);
 	public static int count1 = 0;
 	public static int count2 = 0;
-	public static int maxcount = 10000;
+	public static double maxcount = 1e7;
 	public static vector qnewton(
 		Func<vector,double> f, /* objective function */
 		vector start, /* starting point */
@@ -48,7 +49,7 @@ public static class min{
 				}
 				if(trace) WriteLine($"Current lambda: {lambda}");
 				lambda /= 2.0;
-				if(lambda < 1.0/1024.0){
+				if(lambda < minlambda){
 					x = x + lambda*newtonstep;
 					newgrad = jacobi.numderiv(f,x);
 					B.set_unity();

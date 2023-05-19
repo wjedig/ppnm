@@ -1,0 +1,45 @@
+set terminal svg background "white" size 1000,600
+set key left
+set tics out
+set output "ANN_B.svg"
+
+set multiplot layout 2,4 \
+		margins 0.1,0.98,0.1,0.92 \
+		spacing 0.08,0.12
+
+
+set title "ANN fit for f(x) = 4e^{-x^2}"
+
+
+set ylabel "f(x)" offset 2
+plot [-1:1][-4:4] "out.btrain1.data" u 1:2 title "Training points" w points,\
+	"out.bfit1.data" u 1:2 title "ANN w 5 neurons" w lines
+
+set ylabel "f'(x)"
+plot [-1:1][-4:4] "out.bfit1.data" u 1:4 title "Analytic" w lines,\
+	"out.bfit1.data" u 1:3 title "Fit from ANN" w lines
+
+set ylabel "f''(x)"
+plot [-1:1][-10:10] "out.bfit1.data" u 1:6 title "Analytic" w lines,\
+	"out.bfit1.data" u 1:5 title "Fit from ANN" w lines
+
+set ylabel "F(x) - F(0)"
+plot [-1:1][-4:4] "out.bfit1.data" u 1:8 title "Analytic" w lines,\
+	"out.bfit1.data" u 1:7 title "Fit from ANN" w lines
+	
+set title "ANN fit for f(x) = x^2"
+set ylabel "f(x)"
+plot [-1:1][-4:4] "out.btrain2.data" u 1:2 title "Training points" w points,\
+	"out.bfit2.data" u 1:2 title "ANN w 5 neurons" w lines
+
+set ylabel "f'(x)"
+plot [-1:1][-10:10] "out.bfit2.data" u 1:4 title "Analytic" w lines,\
+	"out.bfit2.data" u 1:3 title "Fit from ANN" w lines
+
+set ylabel "f''(x)"
+plot [-1:1][-4:4] "out.bfit2.data" u 1:6 title "Analytic" w lines,\
+	"out.bfit2.data" u 1:5 title "Fit from ANN" w lines
+
+set ylabel "F(x) - F(0)"
+plot [-1:1][-4:4] "out.bfit2.data" u 1:8 title "Analytic" w lines,\
+	"out.bfit2.data" u 1:7 title "Fit from ANN" w lines	

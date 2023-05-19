@@ -43,9 +43,9 @@ public static class min{
 					B = B + dB;
 					break;
 				}
-				if(trace) WriteLine($"Current lambda: {lambda}");
+				//if(trace) WriteLine($"Current lambda: {lambda}");
 				lambda /= 2.0;
-				if(lambda < 1.0/1024.0){
+				if(lambda < 1.0/1024.0){ // changed from 1.0/1024.0
 					x = x + lambda*newtonstep;
 					newgrad = jacobi.numderiv(f,x);
 					B.set_unity();

@@ -4,7 +4,7 @@ using static System.Console;
 using static System.Math;
 using linalg;
 using genlist;
-
+using calculus;
 
 class main{
 	public static genlist<double> energy;
@@ -43,6 +43,7 @@ class main{
 
 			}//A
 			if(run=="-B"){
+				min.minlambda = 1.0/1024.0;
 				energy = new genlist<double>();
 				signal = new genlist<double>();
 				error  = new genlist<double>();

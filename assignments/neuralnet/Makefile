@@ -8,12 +8,18 @@ LINALG := $(shell find $(MATLIB)/linalg -name '*.cs')
 CALCULUS := $(shell find $(MATLIB)/calculus -name '*.cs')
 GENLIST := $(shell find $(MATLIB)/genlist -name '*.cs')
 
-all: Out.A.txt ANN.svg
+all: Out.A.txt ANN_A.svg Out.B.txt ANN_B.svg
 
-Out.A.txt out.afit.data out.atrain.data: main.exe Makefile
-	mono $< -A  # > $@ 
+Out.A.txt out.afit1.data out.afit2 out.atrain.data: main.exe Makefile
+	mono $< -A > $@ 
 
-ANN.svg: ann.gpi out.afit.data out.atrain.data
+ANN_A.svg: ann_A.gpi out.afit1.data out.afit2.data out.atrain.data
+	gnuplot $<
+
+Out.B.txt out.bfit1.data out.bfit2.data out.btrain1.data out.btrain2.data: main.exe Makefile
+	mono $< -B -acc:1e-3 > $@
+
+ANN_B.svg: ann_B.gpi out.bfit1.data out.btrain1.data out.bfit2.data out.btrain2.data
 	gnuplot $<
 
 main.exe : main.cs neuralnet.cs linalg.dll calculus.dll

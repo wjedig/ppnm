@@ -3,6 +3,7 @@ using static System.Console;
 using System.IO;
 using static System.Math;
 using linalg;
+using genlist;
 
 static class rkint{
 	public static (vector,vector) rkstep12(
@@ -27,6 +28,7 @@ static class rkint{
 			double acc=0.01,		/* absolute accuracy goal */
 			double eps=0.01,		/* relative accuracy goal */
 			genlist<double> xlist = null, genlist<vector> ylist = null
+			,double maxstep = 0
 			)
 	{
 		if(a>b) throw new ArgumentException("driver: a>b");
@@ -54,6 +56,7 @@ static class rkint{
 			double factor = tol[0]/Abs(erv[0]);
 			for(int i=1 ; i<y.size ; i++) factor=Min(factor,tol[i]/Abs(erv[i]));
 			h *= Min( Pow(factor,0.25)*0.95 ,2);
+			if(maxstep>0 && h>maxstep)h=maxstep;
 		} while(true);
 	} //driver
 } //rkint
@@ -70,14 +73,13 @@ class main{
 					yprime[1] = -y[0];
 					return yprime;
 				};
-				vector yfinal = rkint.driver(
-							f: f, 
-							a: 0.0,
-							ya: new vector(2.0,0.0),
-							b: 10.0,
-							xlist: xlist, 
-							ylist: ylist);
-
+				rkint.driver(
+					f: f, 
+					a: 0.0,
+					ya: new vector(2.0,0.0),
+					b: 10.0,
+					xlist: xlist, 
+					ylist: ylist);
 				for(int i=0; i<ylist.size; i++){
 					vector y = ylist[i];
 					double x = xlist[i];
@@ -90,19 +92,18 @@ class main{
 					yprime[0] = -y[0];
 					return yprime;
 				};
-				vector yfinal = rkint.driver(
-							f: f, 
-							a: 0.0,
-							ya: new vector(4.0),
-							b: 10.0,
-							xlist: xlist, 
-							ylist: ylist);
+				rkint.driver(
+					f: f, 
+					a: 0.0,
+					ya: new vector(4.0),
+					b: 10.0,
+					xlist: xlist, 
+					ylist: ylist);
 				WriteLine($"xlist size: {xlist.size}");
 				for(int i=0; i<ylist.size; i++){
 					vector y = ylist[i];
 					double x = xlist[i];
 					WriteLine($"{x} {y[0]}");
-
 				}
 			}
 			if(run=="-A3"){
@@ -112,13 +113,13 @@ class main{
 					yprime[1] = -0.6*y[1] - 7*y[0];
 					return yprime;
 				};
-				vector yfinal = rkint.driver(
-							f: f, 
-							a: 0.0,
-							ya: new vector(4.0,0.0),
-							b: 10.0,
-							xlist: xlist, 
-							ylist: ylist);
+				rkint.driver(
+					f: f, 
+					a: 0.0,
+					ya: new vector(4.0,0.0),
+					b: 10.0,
+					xlist: xlist, 
+					ylist: ylist);
 				for(int i=0; i<ylist.size; i++){
 					vector y = ylist[i];
 					double x = xlist[i];
@@ -143,42 +144,49 @@ class main{
 				genlist<vector> ylist1, ylist2, ylist3;
 				xlist1 = new genlist<double>(); xlist2 = new genlist<double>(); xlist3 = new genlist<double>();
 				ylist1 = new genlist<vector>(); ylist2 = new genlist<vector>(); ylist3 = new genlist<vector>();
-				vector yfinal = rkint.driver(
-							f: f,
-							a: 0.0,
-							ya: new vector(0.5,0.0),
-							b: 100.0,
-							xlist: xlist1,
-							ylist: ylist1);
-				yfinal = rkint.driver(
-						f: f,
-						a: 0.0,
-						ya: new vector(0.5,-0.5),
-						b: 100.0,
-						xlist: xlist2,
-						ylist: ylist2);
-				yfinal = rkint.driver(
-						f: feps,
-						a: 0.0,
-						ya: new vector(0.5,-0.5),
-						b: 100.0,
-						xlist: xlist3,
-						ylist: ylist3);
-				WriteLine($"xlist1 size: {xlist1.size}");
-				WriteLine($"xlist2 size: {xlist2.size}");
-				WriteLine($"xlist3 size: {xlist3.size}");
+				rkint.driver(
+					f: f,
+					a: 0.0,
+					ya: new vector(1.0,0.0),
+					b: 100.0,
+					xlist: xlist1,
+					ylist: ylist1,
+					maxstep:0.1);
+				rkint.driver(
+					f: f,
+					a: 0.0,
+					ya: new vector(0.5,-0.5),
+					b: 100.0,
+					xlist: xlist2,
+					ylist: ylist2);
+				rkint.driver(
+					f: feps,
+					a: 0.0,
+					ya: new vector(0.5,-0.5),
+					b: 100.0,
+					xlist: xlist3,
+					ylist: ylist3);
+				var outstream = new StreamWriter("Out.B.txt",append:false);
+				outstream.WriteLine("--- Solved ODEs for planetary motion ---");
+				outstream.WriteLine($"No. of steps for Newtonian Circular Motion: {xlist1.size}");
+				outstream.WriteLine("NOTE: due to constant function, max step was set to 0.1 to increase no. of plotting points");
+				outstream.WriteLine($"No. of steps for Newtonian Elliptical Motion: {xlist2.size}");
+				outstream.WriteLine($"No. of steps for relativistic precession: {xlist3.size}");
+				outstream.Close();
 				var outputstream = new StreamWriter("Out.B1.data",append:false);
 				for(int i=0; i<ylist1.size; i++){
 					vector y = ylist1[i];
 					double x = xlist1[i];
 					outputstream.WriteLine($"{x} {y[0]}");
 				}
+				outputstream.Close();
 				outputstream = new StreamWriter("Out.B2.data",append:false);
 				for(int i=0; i<ylist2.size; i++){
 					vector y = ylist2[i];
 					double x = xlist2[i];
 					outputstream.WriteLine($"{x} {y[0]}");
 				}
+				outputstream.Close();
 				outputstream = new StreamWriter("Out.B3.data",append:false);
 				for(int i=0; i<ylist3.size; i++){
 					vector y = ylist3[i];

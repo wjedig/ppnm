@@ -5,7 +5,7 @@ MKEXE = mcs -target:exe -out:$@ $(DLLS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 MATLIB = $(HOME)/repos/ppnm/matlib
 
-all : Out.testA.txt dr.svg rmax.svg
+all : Out.testA.txt Dr.svg Rmax.svg Eigenfuncs.svg
 
 Out.testA.txt: main.exe Makefile
 	mono main.exe -test > $@
@@ -13,24 +13,24 @@ Out.testA.txt: main.exe Makefile
 main.exe : main.cs matlib.dll
 	$(MKEXE)
 
-dr.svg: dr.gpi out.dr.data
+Dr.svg: dr.gpi out.dr.data
 	gnuplot $<
 
-rmax.svg: rmax.gpi out.rmax.data
+Rmax.svg: rmax.gpi out.rmax.data
 	gnuplot $<
 
-eigenfuncs.svg: eigenfuncs.gpi out.eigenfuncs.data
+Eigenfuncs.svg: eigenfuncs.gpi out.eigenfuncs.data
 	gnuplot $<
 
 out.dr.data : main.exe
 	>$@
-	for N in $$(seq 0.05 0.05 3); do \
+	for N in $$(seq 0.1 0.25 3); do \
 		mono $< -plotdr -rmax:10 -dr:$$N 1>>$@ 2>err ;\
 	done
 
 out.rmax.data : main.exe
 	>$@
-	for N in $$(seq 1 0.1 10); do \
+	for N in $$(seq 1 0.5 10); do \
 		mono $< -plotrmax -rmax:$$N -dr:0.1 1>>$@ 2>err ;\
 	done
 
