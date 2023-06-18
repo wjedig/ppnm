@@ -109,8 +109,8 @@ class main{
 				}
 				outstream.Close();
 				f = (double a) => Cos(4*a); // changed from a*a
-				WriteLine("\nTesting for g(x) = x^2");
-				WriteLine("This should make the g'(x) = 2x, g''(x) = 2, and G(x) = 1/2 x^3...");
+				WriteLine("\nTesting for g(x) = cos(4x)");
+				WriteLine("This should make g'(x) = -4sin(4x), g''(x) = -16cos(4x), and G(x) = 1/4 sin(4x)...");
 				WriteLine("... which should be easy to confirm visually on ANN_2.svg");
 				outstream = new StreamWriter("out.btrain2.data",append:false);
 				nx = 100;
