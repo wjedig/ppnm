@@ -6,4 +6,4 @@ Convergence took 30 iterations for 5 neurons
 Testing for g(x) = x^2
 This should make the g'(x) = 2x, g''(x) = 2, and G(x) = 1/2 x^3...
 ... which should be easy to confirm visually on ANN_2.svg
-Convergence took 102 iterations for 5 neurons
+Convergence took 818 iterations for 10 neurons

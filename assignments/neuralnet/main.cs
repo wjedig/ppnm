@@ -108,12 +108,13 @@ class main{
 					outstream.WriteLine($"{xfit} {yfit} {ypfit} {ypexp} {yppfit} {yppexp} {yafit} {yaexp}");
 				}
 				outstream.Close();
-				f = (double a) => a*a;
+				f = (double a) => Cos(4*a); // changed from a*a
 				WriteLine("\nTesting for g(x) = x^2");
 				WriteLine("This should make the g'(x) = 2x, g''(x) = 2, and G(x) = 1/2 x^3...");
 				WriteLine("... which should be easy to confirm visually on ANN_2.svg");
 				outstream = new StreamWriter("out.btrain2.data",append:false);
 				nx = 100;
+				neurons = 10;
 				x = new vector(nx); y = new vector(nx);
 				for(int i=0; i<nx; i++){
 					x[i] = -1 + i*2.0/(nx-1); /* n samples in [-1,1] */
@@ -127,9 +128,9 @@ class main{
 				WriteLine($"Convergence took {count} iterations for {neurons} neurons");
 				outstream = new StreamWriter("out.bfit2.data",append:false);
 				npoints = 100;
-				fp = (double a) => 2*a;
-				fpp = (double a) => 2.0;
-				F = (double a) => 0.5*a*a*a;
+				fp = (double a) => -4.0*Sin(4*a);
+				fpp = (double a) => -16.0*Cos(4*a);
+				F = (double a) => 0.25*Sin(4*a);
 				for(int i=0; i<npoints; i++){
 					xfit = (2.0*i-npoints)/npoints; /* n samples in [-1,1] */
 					yfit = ann5.predict(xfit,"f");

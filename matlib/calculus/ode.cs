@@ -31,7 +31,7 @@ public static class rkint{
 			double eps=0.01,		/* relative accuracy goal */
 			genlist<double> xlist = null, 
 			genlist<vector> ylist = null,
-			double maxstep = 0.0;
+			double maxstep = 0.0
 			)
 	{
 		if(a>b) throw new ArgumentException("driver: a>b");
