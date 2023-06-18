@@ -61,7 +61,7 @@ public static class Test{
 	}
 	public static void testB_plot(double rmax, double dr){
 		matrix ham = Utils.build_hamiltonian(rmax, dr);
-		(vector e, matrix V) = jacobi.cyclic(ham);
+		var (e,V) = jacobi.cyclic(ham);
 		for(int i=0 ; i<V.size2 ; i++){
 			Write($"{i*dr} ");
 			for(int j=0 ; j<V.size1 ; j++){
@@ -72,12 +72,12 @@ public static class Test{
 	}
 	public static void testB_rmax(double rmax, double dr){
 		matrix ham = Utils.build_hamiltonian(rmax, dr);
-		(vector e, matrix V) = jacobi.cyclic(ham);
+		(vector e, _) = jacobi.cyclic(ham);
 		WriteLine($"{rmax} {e[0]}");
 	}
 	public static void testB_dr(double rmax, double dr){
 		matrix ham = Utils.build_hamiltonian(rmax, dr);
-		(vector e, matrix V) = jacobi.cyclic(ham);
+		(vector e, _) = jacobi.cyclic(ham);
 		WriteLine($"{dr} {e[0]}");
 	}
 }

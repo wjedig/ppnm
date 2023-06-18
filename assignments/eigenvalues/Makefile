@@ -3,7 +3,7 @@ DLLS = $(addprefix -reference:,$(filter %.dll,$^))
 CODE = $(filter %.cs,$^)
 MKEXE = mcs -target:exe -out:$@ $(DLLS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
-MATLIB = $(HOME)/repos/ppnm/matlib
+MATLIB = ../../matlib
 
 all : Out.testA.txt Dr.svg Rmax.svg Eigenfuncs.svg
 

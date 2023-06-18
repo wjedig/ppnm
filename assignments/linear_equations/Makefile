@@ -1,7 +1,7 @@
 
 #RM = rm ---force
 
-MATLIB = $(HOME)/repos/ppnm/matlib
+MATLIB = ../../matlib
 
 all: main.exe Out.test.txt out.times.data opcount.svg
 

@@ -3,7 +3,7 @@ DLLS = $(addprefix -reference:,$(filter %.dll,$^))
 CODE = $(filter %.cs,$^)
 MKEXE = mcs -target:exe -out:$@ $(DLLS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
-MATLIB = $(HOME)/repos/ppnm/matlib
+MATLIB = ../../matlib
 LINALG := $(shell find $(MATLIB)/linalg -name '*.cs')
 
 all: Out.A.txt Out.B.txt Error.svg Quasi.svg

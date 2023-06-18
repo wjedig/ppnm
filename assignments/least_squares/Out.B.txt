@@ -1,6 +1,7 @@
 Fit parameters given by: 
 a = 4.9511553496486
 b = 0.169887082001008
+(Here b refers to lambda)
 Covariance matrix given by:
    0.00115   0.000178 
   0.000178   4.83e-05 

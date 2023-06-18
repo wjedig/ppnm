@@ -5,5 +5,12 @@ set ylabel "y"
 set tics out
 set title "Gamma Function"
 set output "Gamma.svg"
-plot [0:7][0:150] "gamma.data" with lines linetype 2 title "theory"\
+set xzeroaxis lw 2 lt 1 lc rgb "black"
+set yzeroaxis lw 2 lt 1 lc rgb "black"
+set arrow from 0, graph 0 to 0, graph 1 nohead lt "dashed" lc rgb "blue" lw 2
+set arrow from -1, graph 0 to -1, graph 1 nohead lt "dashed" lc rgb "blue" lw 2
+set arrow from -2, graph 0 to -2, graph 1 nohead lt "dashed" lc rgb "blue" lw 2
+set arrow from -3, graph 0 to -3, graph 1 nohead lt "dashed" lc rgb "blue" lw 2
+set arrow from -4, graph 0 to -4, graph 1 nohead lt "dashed" lc rgb "blue" lw 2
+plot [-5:5][-5:5] "gamma.data" with lines lt rgb "red" lw 2 title "theory"\
 	, "factorials.data" using ($1+1):($2) with points title "experiment"

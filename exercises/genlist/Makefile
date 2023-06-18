@@ -1,5 +1,5 @@
 Out.txt: main.exe
-	mono main.exe > Out.txt
+	mono main.exe < infile.txt > Out.txt
 
 main.exe: main.cs genlist.dll
 	mcs -target:exe -out:$@ \

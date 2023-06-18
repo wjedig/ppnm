@@ -1,0 +1,12 @@
+sqrt(-1) = 6.12e-17+-1i (expected: +/- i). This result is approximately correct.
+
+sqrt(i) = 0.707+0.707i (expected: 1/√2+i/√2). This result is approximately correct.
+
+e^i = 0.54+0.841i (expected around: 0.54 + 0.84i). This result is approximately correct.
+
+e^i*pi = -1+1.22e-16i (expected: -1). This result is approximately correct.
+
+i^i = 0.208+0i (expected around: 0.208). This result is approximately correct.
+
+ln(i) = 0+1.57i (expected: pi/2 * i). This result is approximately correct.
+

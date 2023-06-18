@@ -1,5 +1,0 @@
-ODE: 		For the planet orbitals, the newtonian movement is just y=1, y'=0, y''=0
-
-Montecarlo: 	For part b, can we use error quantification by using different halton sequences, or should we use
-		different quasistatic methods
-

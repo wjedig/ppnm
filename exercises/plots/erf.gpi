@@ -1,0 +1,11 @@
+set terminal svg
+set key left
+set xlabel "x"
+set ylabel "y"
+set tics out
+set title "Error Function"
+set output "ErrorFunction.svg"
+set xzeroaxis lw 2 lt 1 lc rgb "black"
+set yzeroaxis lw 2 lt 1 lc rgb "black"
+plot [-3.5:3.5][-1:1] "erf.data" with lines lw 2 title "theory"\
+	, "tabulated_erf.data" using 1:2 with points title "experiment"

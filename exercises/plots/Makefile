@@ -1,8 +1,18 @@
+
+
+all: Gamma.svg Erf.svg
+
 Gamma.svg: gamma.gpi gamma.data factorials.data
 	gnuplot $<
-gamma.data : main.exe
-	mono $< >$@
 
+Erf.svg: erf.gpi tabulated_erf.data erf.data
+	gnuplot $<
+
+gamma.data: main.exe
+	mono $< -gamma >$@
+
+erf.data: main.exe
+	mono $< -erf >$@
 
 main.exe : main.cs sfuns.dll
 	mcs -target:exe -out:$@ \

@@ -50,7 +50,7 @@ public static class Test{
 			ys[(int)i] = i*i + i*rnd.NextDouble() - rnd.NextDouble();
 			dy[(int)i] = rnd.NextDouble();
 		}	
-		(vector c, matrix S) = LS.lsfit(fs,xs,ys,dy);
+		(vector c, _) = LS.lsfit(fs,xs,ys,dy);
 		if(writeFit){
 			double start = xs[0];
 			double stop = xs[n-1];
@@ -114,6 +114,7 @@ class main{
 			if(writeCov){
 				WriteLine("Fit parameters given by: ");
 				Utils.writeFitParams(c);
+				WriteLine("(Here b refers to lambda)");
 				S.print("Covariance matrix given by:");
 				Utils.printBlank();
 				WriteLine("Half life given by:");
