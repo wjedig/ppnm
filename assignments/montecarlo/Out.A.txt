@@ -1,28 +1,28 @@
 --- Estimating area of circle with 1e7 points ---
 
 Calculation by 'throwing'
-Area calculated to be : 3.1429232
+Area calculated to be : 3.1414568
 Actual area: 3.14159265358979
-Error estimated to be : 0.000519011229059811
-Actual error: 0.00133054641020669
+Error estimated to be : 0.000519333840004073
+Actual error: 0.000135853589793289
 
 Calculation by evaluating function value with spherical coordinates
 This means evaluating f(r,phi) = r from r = phi = 0, to r = 1, phi = 2pi
-Area calculated to be : 3.14184018261777
+Area calculated to be : 3.14160133321527
 Actual area: 3.14159265358979
-Error estimated to be : 0.000573602789642927
-Actual error: 0.000247529027979088
+Error estimated to be : 0.000573494568636838
+Actual error: 8.67962547745904E-06
 
 
 --- Estimating volume of unit sphere ---
-Area calculated to be : 4.18976690202119
+Area calculated to be : 4.18844486085721
 Actual area: 4.18879020478639 (4/3 pi)
-Error estimated to be : 0.00146377382352451
-Actual error: 0.00097669723480287
+Error estimated to be : 0.0014635054825188
+Actual error: 0.000345343929178732
 
 
 --- Estimating area of crazy function from hw with 1e7 points ---
-Area calculated to be : 1.39234928155581
+Area calculated to be : 1.39119802099591
 Actual area: 1.39320392968568
-Error estimated to be : 0.0027319308483881
-Actual error: 0.000854648129866353
+Error estimated to be : 0.0032388701168481
+Actual error: 0.00200590868977124
