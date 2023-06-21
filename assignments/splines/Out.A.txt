@@ -1,0 +1,4 @@
+--- PART A ---
+The integral I of the plot shown in Linspline.svg was found to be:
+I = 5.85
+This was also what I got when I calculated the integral manually.

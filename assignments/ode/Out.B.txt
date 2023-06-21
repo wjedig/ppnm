@@ -1,0 +1,6 @@
+--- Solved ODEs for planetary motion ---
+No. of steps for Newtonian Circular Motion: 1004
+NOTE: due to constant function, max step was set to 0.1 to increase no. of plotting points
+No. of steps for Newtonian Elliptical Motion: 3764
+No. of steps for relativistic precession: 3729
+These planetary motions are plotted in Planets.svg

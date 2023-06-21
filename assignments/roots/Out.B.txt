@@ -1,0 +1,4 @@
+--- PART B ---
+Emin found to be -0.500038819470413 in 109 iterations
+This result is plotted in Eigenfunc.svg. The results from the shooting method are also plotted, as it's cool to see how the convergence happens.
+The convergence tests are shown in Convergence.svg

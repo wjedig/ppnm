@@ -1,0 +1,9 @@
+--- PART B ---
+
+Testing for g(x) = 4x*e^(-x^2)
+Convergence took 30 iterations for 5 neurons
+
+Testing for g(x) = cos(4x)
+This should make g'(x) = -4sin(4x), g''(x) = -16cos(4x), and G(x) = 1/4 sin(4x)...
+... which should be easy to confirm visually on ANN_2.svg
+Convergence took 818 iterations for 10 neurons

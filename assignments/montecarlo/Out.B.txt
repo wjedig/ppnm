@@ -1,0 +1,6 @@
+--- Estimating the area of a circle with radius 1, with Quasirandom sequences ---
+(I'm again using 1e7 points)
+Area calculated to be : 3.14159085011255
+Actual area: 3.14159265358979
+Error estimated to be : 9.26847230303067E-07
+Actual error: 1.80347724398899E-06

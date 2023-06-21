@@ -1,0 +1,6 @@
+--- PART A ---
+running for function y'=-y (should be exponential decay)
+running for function y''=-y (should be sine/cosine)
+Both y'=-y and y''=-y are plotted in ODE_test.svg
+running for Dampened Harmonic Oscilator...
+This is plotted in ODE_damp.svg
