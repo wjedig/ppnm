@@ -1,4 +1,0 @@
-VTAV == D : True
-VDVT == A : True
-VTV = I : True
-VVT = I : True

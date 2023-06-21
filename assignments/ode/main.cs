@@ -107,6 +107,14 @@ class main{
 				}
 			}
 			if(run=="-A3"){
+				var outstream = new StreamWriter("Out.A.txt", append:false);
+				outstream.WriteLine("--- PART A ---");
+				outstream.WriteLine("running for function y'=-y (should be exponential decay)");
+				outstream.WriteLine("running for function y''=-y (should be sine/cosine)");
+				outstream.WriteLine("Both y'=-y and y''=-y are plotted in ODE_test.svg");
+				outstream.WriteLine("running for Dampened Harmonic Oscilator...");
+				outstream.WriteLine("This is plotted in ODE_damp.svg");
+				outstream.Close();
 				Func<double, vector, vector> f = (double x, vector y) => { /* plotting damp oscil */
 					vector yprime = new vector(2);
 					yprime[0] = y[1];
@@ -172,22 +180,23 @@ class main{
 				outstream.WriteLine("NOTE: due to constant function, max step was set to 0.1 to increase no. of plotting points");
 				outstream.WriteLine($"No. of steps for Newtonian Elliptical Motion: {xlist2.size}");
 				outstream.WriteLine($"No. of steps for relativistic precession: {xlist3.size}");
+				outstream.WriteLine("These planetary motions are plotted in Planets.svg");
 				outstream.Close();
-				var outputstream = new StreamWriter("Out.B1.data",append:false);
+				var outputstream = new StreamWriter("out.B1.data",append:false);
 				for(int i=0; i<ylist1.size; i++){
 					vector y = ylist1[i];
 					double x = xlist1[i];
 					outputstream.WriteLine($"{x} {y[0]}");
 				}
 				outputstream.Close();
-				outputstream = new StreamWriter("Out.B2.data",append:false);
+				outputstream = new StreamWriter("out.B2.data",append:false);
 				for(int i=0; i<ylist2.size; i++){
 					vector y = ylist2[i];
 					double x = xlist2[i];
 					outputstream.WriteLine($"{x} {y[0]}");
 				}
 				outputstream.Close();
-				outputstream = new StreamWriter("Out.B3.data",append:false);
+				outputstream = new StreamWriter("out.B3.data",append:false);
 				for(int i=0; i<ylist3.size; i++){
 					vector y = ylist3[i];
 					double x = xlist3[i];

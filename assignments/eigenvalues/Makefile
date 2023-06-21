@@ -5,9 +5,9 @@ MKEXE = mcs -target:exe -out:$@ $(DLLS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 MATLIB = ../../matlib
 
-all : Out.testA.txt Dr.svg Rmax.svg Eigenfuncs.svg
+all : Out.A.txt Dr.svg Rmax.svg Eigenfuncs.svg
 
-Out.testA.txt: main.exe Makefile
+Out.A.txt: main.exe Makefile
 	mono main.exe -test > $@
 
 main.exe : main.cs matlib.dll
@@ -44,7 +44,7 @@ matlib.dll : evd.cs $(MATLIB)/linalg/vector.cs  $(MATLIB)/linalg/matrix.cs
 .PHONEY : clean test
 
 clean:
-	$(RM) *.exe *.dll [Oo]ut* log* *.data err
+	$(RM) *.exe *.dll [Oo]ut* log* *.data err *.svg
 test: 
 	echo $(RM)
 

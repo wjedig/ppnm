@@ -4,7 +4,7 @@ set xlabel "xs (arbitrary units)"
 set ylabel "ys (arbitrary units)"
 set tics out
 set title "Linear Spline"
-set output "linspline.svg"
+set output "Linspline.svg"
 
 
 plot [0:2][0:8] "Out.plot.data" u 1:2 title "Linspline" w points,\

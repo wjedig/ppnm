@@ -7,5 +7,5 @@ set title "E0 vs dr parameter"
 set output "Dr.svg"
 
 
-plot [0:3][-1:0] "out.dr.data" using ($1):($2) with points title "experiment"
+plot [0:3][-1:0] "out.dr.data" using ($1):($2) with linespoints title "experiment"
 	

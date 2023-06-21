@@ -68,9 +68,13 @@ class main{
 				xlist = new genlist<double>();
 				ylist = new genlist<vector>();
 				double Emin = B();
-				WriteLine($"Emin found to be {Emin} in {counter} iterations");
-				WriteLine($"Writing data file with found eigenfunction...");
-				var outstream = new StreamWriter("out.b2all.data", append:false);
+				var outstream = new StreamWriter("Out.B.txt",append:false);
+				outstream.WriteLine("--- PART B ---");
+				outstream.WriteLine($"Emin found to be {Emin} in {counter} iterations");
+				outstream.WriteLine("This result is plotted in Eigenfunc.svg. The results from the shooting method are also plotted, as it's cool to see how the convergence happens.");
+				outstream.WriteLine("The convergence tests are shown in Convergence.svg");
+				outstream.Close();
+				outstream = new StreamWriter("out.b2all.data", append:false);
 				for(int i=0; i<ylist.size; i++){
 					vector y = ylist[i];
 					double x = xlist[i];
@@ -86,7 +90,7 @@ class main{
 					return yprime;
 				};
 				vector finit = new vector(rmin-rmin*rmin, 1.0 - 2.0*rmin);
-				vector yfinal = rkint.driver(
+				_ = rkint.driver(
 						f: f,
 						a: rmin,
 						ya: finit,
@@ -171,14 +175,6 @@ class main{
 			y[1] = Sqrt(x[0])-x[1]+3.0;
 			return y;
 		};
-		//xguess = new vector(15.0,6.0,10.0);
-		//x1 = root.newton(f,xguess);
-		//WriteLine("\n--- Testing Jacobi Matrix for function f(x1,x2) ---\n");
-		//WriteLine("f1(x) = x3^2+x2-x1");
-		//WriteLine("f2(x) = Sqrt(x1)-x2+3");
-		//xguess.print("\nInitial guess: ");
-		//x1.print("Root found at: ");
-		//WriteLine("Actual root: (16,7,3)");
 		WriteLine("\n--- Finding extrema of Rosenbruck's valley function---");
 		WriteLine("Derivative found to be: [-2(1-x)-400x(y-x^2)  ,  200(y-x^2)]");
 		f = (vector x) => {
@@ -193,12 +189,12 @@ class main{
 		xguess.print("\nInitial guess: ");
 		x1.print("Root found at: ");
 		WriteLine("Actual root: (1.0,1.0)");
-		xguess = new vector(-0.9,0.9);
-		eps = 0.001; acc = 0.001;
-		x1 = root.newton(f,xguess);
-		xguess.print("\nInitial guess: ");
-		x1.print("Root found at: ");
-		WriteLine("Actual root: (1.0,1.0)");
+		//xguess = new vector(-0.9,0.9);
+		//eps = 0.001; acc = 0.001;
+		//x1 = root.newton(f,xguess);
+		//xguess.print("\nInitial guess: ");
+		//x1.print("Root found at: ");
+		//WriteLine("Actual root: (1.0,1.0)");
 	}
 
 	public static vector M(vector Evec){

@@ -30,7 +30,7 @@ matlib.dll : $(LINALG)
 .PHONEY : clean test all
 
 clean:
-	$(RM) *.exe *.dll [Oo]ut* log*
+	$(RM) *.exe *.dll [Oo]ut* log* *.svg
 test: 
 	echo $(RM)
 

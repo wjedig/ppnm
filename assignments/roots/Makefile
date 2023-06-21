@@ -8,10 +8,10 @@ LINALG := $(shell find $(MATLIB)/linalg -name '*.cs')
 CALCULUS := $(shell find $(MATLIB)/calculus -name '*.cs')
 GENLIST := $(shell find $(MATLIB)/genlist -name '*.cs')
 
-all: Out.TestJacobi.txt Out.A.txt Convergence.svg Eigenfunc.svg
+all: Out.A.txt Convergence.svg Eigenfunc.svg
 
-Out.TestJacobi.txt: main.exe Makefile
-	mono $< -test > $@
+#Out.TestJacobi.txt: main.exe Makefile
+#	mono $< -test > $@
 
 Out.A.txt: main.exe Makefile
 	mono $< -A > $@ 
@@ -40,6 +40,6 @@ calculus.dll : linalg.dll $(CALCULUS)
 .PHONY : all clean test
 
 clean:
-	$(RM) *.exe *.dll [Oo]ut* log*
+	$(RM) *.exe *.dll [Oo]ut* log* *.svg
 test: 
 	echo $(RM)

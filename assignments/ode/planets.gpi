@@ -8,6 +8,6 @@ set title "Planetary Motion"
 set output "Planets.svg"
 
 
-plot [-2:5][-2:5] "Out.B1.data" using (1/$2)*cos($1):(1/$2)*sin($1) title "u(0)=1, u'(0)=0, ε=0" w lines, \
-		"Out.B2.data" using (1/$2)*cos($1):(1/$2)*sin($1) lt -1 title "u(0)=1, u'(0)=-0.5, ε=0" w lines, \
-		"Out.B3.data" using (1/$2)*cos($1):(1/$2)*sin($1) title "u(0)=1, u'(0)=-0.5, ε=0.01" w lines, \
+plot [-2:5][-2:5] "out.B1.data" using (1/$2)*cos($1):(1/$2)*sin($1) title "u(0)=1, u'(0)=0, ε=0" w lines, \
+		"out.B2.data" using (1/$2)*cos($1):(1/$2)*sin($1) lt -1 title "u(0)=1, u'(0)=-0.5, ε=0" w lines, \
+		"out.B3.data" using (1/$2)*cos($1):(1/$2)*sin($1) title "u(0)=1, u'(0)=-0.5, ε=0.01" w lines, \

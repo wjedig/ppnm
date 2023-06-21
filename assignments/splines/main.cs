@@ -88,6 +88,7 @@ class main{
 	public static void Main(string[] args){
 		foreach(string run in args){
 			if(run=="-A"){
+				WriteLine("--- PART A ---");
 				vector xsvec = new vector(11), ysvec = new vector(11);
 				int i = 0;
 				for(string line=In.ReadLine(); line != null; line=In.ReadLine()){
@@ -98,7 +99,9 @@ class main{
 					i++;
 				}
 				double integ = linspline.linterpInteg(xsvec, ysvec, 1.7);
-				WriteLine($"integral = {integ}");
+				WriteLine("The integral I of the plot shown in Linspline.svg was found to be:");
+				WriteLine($"I = {integ}");
+				WriteLine("This was also what I got when I calculated the integral manually.");
 			}
 			if(run=="-plot"){
 				vector xsvec = new vector(11), ysvec = new vector(11);
@@ -121,6 +124,7 @@ class main{
 				
 			}
 			if(run=="-B"){
+				WriteLine("--- PART B ---");
 				vector xsvec = new vector("1,2,3,4,5"), ysvec = new vector(5);
 				for(int i=0; i<5; i++) ysvec[i] = 1;
 				qspline testspline = new qspline(xsvec,ysvec);

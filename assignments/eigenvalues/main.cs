@@ -36,12 +36,18 @@ public static class Utils{
 
 public static class Test{
 	public static void testA(int n=10, double scale = 1.0, bool trace=false){
+		WriteLine("---Generating random symmetric matrix A---");
 		matrix A = Utils.make_sym_matrix(n,scale);
+		A.print("A given by:");
+		WriteLine("---Calculating matrices V and D---");
 		(vector w, matrix V) = jacobi.cyclic(A);
 		matrix D = new matrix(n,n);
 		for(int i=0 ; i<n ; i++){
 			D[i,i] = w[i];
 		}
+		V.print("V given by:");
+		D.print("D given by:");
+		WriteLine("---Checking the requirements from the assignment description---");
 		matrix VTAV = (V.T)*A*V;
 		WriteLine($"VTAV == D : {VTAV.approx(D,acc:1e-3,eps:0)}");
 		if(trace){VTAV.print("VTAV = ",format:"{0,20:g15}"); D.print("D = ",format:"{0,20:g15}");}
@@ -86,7 +92,7 @@ class main{
 	public static void Main(string[] args){
 		double rmax = 10;
 		double dr = 0.3;
-		int size = 30;
+		int size = 10;
 		double scale = 1.0;
 		bool trace = false;
 		foreach(string param in args){ // set all params

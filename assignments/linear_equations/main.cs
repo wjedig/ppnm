@@ -32,15 +32,10 @@ public static class QRGS{
 		return c;
 	}
 	public static matrix inverse(matrix A, matrix Q = null, matrix R = null){
-		//(int n, int m) = (A.size1, A.size2);
-		//Debug.Assert(n==m,string.Format("Only square matrices are invertible. A has dimension ({0},{1})",n,m));
-		//WriteLine($"n = {n}, m = {m}");
-
 		int n = A.size1;
 		matrix invA = new matrix(n,n);
 		vector ei = new vector(n);
 		ei[0] = 1;
-		
 		if((Q == null) || (R == null)){
 			(Q, R) = QRGS.decomp(A);
 		}
@@ -54,12 +49,12 @@ public static class QRGS{
 		}
 		return invA;
 	}
-
-
 }
 
 public static class Test{
 	public static void test(){	
+		WriteLine("--- PART A ---");
+		WriteLine("generating random matrix A...");
 		vector a = new vector(1,2,3);
 		a.dot(a);
 		
@@ -72,10 +67,11 @@ public static class Test{
 				A[i,j] = rnd.NextDouble()*100.0; // Fill matrix with numbers between 0-100
 			}
 		}
+		A.print("A given by:");
+		WriteLine("Running QR deocomposition...");
 		(matrix Q, matrix R) = QRGS.decomp(A);
-		R.print("Check that R is upper triangular, R = \n");
+		R.print("Check that R is upper triangular, R =");
 		matrix QTQ = (Q.T)*Q;
-		//QTQ.print("\n Check that QTQ is the identity matrix: \n");
 		Write($"\n Check that QTQ is the identity matrix by using Approx method: \n QTQ = 1: {QTQ.approx(matrix.id(m))}\n");
 		WriteLine("Check that QR = A");
 		WriteLine($"QR = A: {A.approx(Q*R)}");
@@ -90,17 +86,19 @@ public static class Test{
 				A2[i,j] = rnd.NextDouble()*100.0;
 			}
 		}
-		
+		WriteLine("Testing solve method with a random matrix A and vector b...");
 		(matrix Q2, matrix R2) = QRGS.decomp(A2);
 		vector x2 = QRGS.solve(Q2, R2, b2);
-		
+		A2.print("A given by:");
+		b2.print("b given by:");
+		x2.print("solution x given by: ");
 		WriteLine("Check that Ax = b");
 		WriteLine($"Ax = b : {b2.approx(A2*x2)}");
 
 		// Test inverse:
 		
-		//matrix Id = matrix.id(10);
-		WriteLine("************************************");
+		WriteLine("\n\n--- PART B ---");
+		WriteLine("Calculating inverse of matrix A...");
 		matrix A3 = QRGS.inverse(A2);
 		WriteLine("Check that A*A^-1 = I");
 		matrix A4 = A2*A3;
@@ -111,13 +109,10 @@ public static class Test{
 
 class main{
 	public static void Main(string[] args){
-		//WriteLine("running main i guess uwu");
 		foreach(string arg in args){
-			//WriteLine(arg);
 			string[] words=arg.Split(':');
 			if(words[0]=="-size"){
 				int n = int.Parse(words[1]);
-				WriteLine($"n = {n}");
 				matrix A = new matrix(n,n);
 				var rnd = new System.Random(1);
 				for(int i=0; i<n; i++){
@@ -125,7 +120,6 @@ class main{
 						A[i,j] = rnd.NextDouble()*100.0; // Fill matrix with floats 0-100
 					}
 				}
-				(matrix Q, matrix R) = QRGS.decomp(A);
 			}
 			if(words[0]=="-test"){
 				Test.test();

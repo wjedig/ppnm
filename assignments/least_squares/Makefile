@@ -6,21 +6,18 @@ MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 MATLIB = ../../matlib
 LINALG := $(shell find $(MATLIB)/linalg -name '*.cs')
 
-all : Out.A.txt Out.B.txt decay.svg
+all : Out.txt Decay.svg
 
-Out.A.txt: main.exe
-	mono main.exe -test >$@
-
-Out.B.txt: main.exe
+Out.txt: main.exe
 	mono main.exe -testB -input:decay.txt >$@
 
-out.lndecay.data : main.exe
-	mono main.exe -input:decay.txt -writeData > $@
+#out.lndecay.data : main.exe
+#	mono main.exe -input:decay.txt -writeData > $@
 
 out.decayfit.par: main.exe
 	mono main.exe -input:decay.txt -writeFit > $@
 
-decay.svg : decay.gpi out.lndecay.data out.decayfit.par
+Decay.svg : decay.gpi out.decayfit.par
 	gnuplot $<
 
 main.exe : main.cs matlib.dll
@@ -32,24 +29,10 @@ matlib.dll : ls.cs $(LINALG)
 .PHONEY : clean test
 
 clean:
-	$(RM) *.exe *.dll [Oo]ut* log* err start.par *.data
+	$(RM) *.exe *.dll [Oo]ut* log* err start.par *.data *.svg
 test: 
 	echo $(RM)
 
 
 
 
-#out.fit.data : main.exe
-#	mono main.exe -test -writeFit > $@
-#
-#out.experiment.data : main.exe
-#	mono main.exe -test -writeData >$@
-#
-#ls1.svg : fitA.gpi out.fit.data out.experiment.data
-#	gnuplot $<
-#
-#
-#How to make library
-#
-#library.dll : library.cs
-#	mcs -target:library -out:$@ $(filter %.cs,$^)

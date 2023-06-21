@@ -4,11 +4,15 @@ set xlabel "time (days)"
 set ylabel "Activity of ThX (relative units)"
 set tics out
 set title "Radioactive decay of ThX"
-set output "decay.svg"
+set output "Decay.svg"
 
 load "out.decayfit.par"
-f(x) = a - b*x 
+F_low(x) = exp(a-a_err)*exp((-b-b_err)*x)
+F(x) = exp(a)*exp(-b*x)
+F_high(x) = exp(a+a_err)*exp((-b+b_err)*x)
 
-plot [0:16][0:6] "out.lndecay.data" u 1:2:3 w yerr title "experiment",\
-	f(x) with lines title "fit"
+plot [0:16][0:150] "decay.txt" u 1:2:3 w yerr title "experiment",\
+	F_low(x) with lines title "min fit",\
+	F(x) with lines title "fit",\
+	F_high(x) with lines title "max fit"
 	

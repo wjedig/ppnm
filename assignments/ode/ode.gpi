@@ -7,5 +7,5 @@ set title "Several Differential Equations"
 set output "ODE_test.svg"
 
 
-plot [0:10][-5:5] "Out.ode1.data" u 1:2 title "y' = -y" w linespoints ,\
-		"Out.ode2.data" u 1:2 title "y''(x) = -y" w linespoints
+plot [0:10][-5:5] "out.ode1.data" u 1:2 title "y' = -y" w linespoints ,\
+		"out.ode2.data" u 1:2 title "y''(x) = -y" w linespoints

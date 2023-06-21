@@ -111,8 +111,6 @@ class main{
 				WriteLine($"\n\n--- Estimating area of crazy function from hw with 1e7 points ---");
 				f = (vector v) => {
 					double fval = Pow(PI,-3)*(1.0/(1.0-Cos(v[0])*Cos(v[1])*Cos(v[2])));
-					//double norm = v.norm();
-					//double inside = (norm<=fval) ? 1.0 : 0.0;
 					return fval;
 				};
 				a = new vector(0.0,0.0,0.0);
@@ -125,15 +123,15 @@ class main{
 				WriteLine($"Actual error: {Abs(acc_area-area)}");
 			}//A
 			if(run=="-B"){
-				/* Checking the area of a circle with radius 1 */
-				Func<vector,double> f = (vector v) => (v.norm() <= 1.0) ? 1.0 : 0.0;
-				/* this is a quarter of a circle, so result should be pi/4 */
+				WriteLine("--- Estimating the area of a circle with radius 1, with Quasirandom sequences ---");
+				WriteLine("(I'm again using 1e7 points)");
+				Func<vector,double> f = (vector v) => v[0];
 				vector a = new vector(0.0,0.0);
-				vector b = new vector(1.0,1.0);
-				double acc_area = PI/4.0;
+				vector b = new vector(1.0,2.0*PI);
+				double acc_area = PI;
 				double area, pred_err;
 				int n = Convert.ToInt32(1e7);
-				(area, pred_err) = mc.plainmc(f,a,b,n);
+				(area, pred_err) = mc.quasimc(f,a,b,n);
 				WriteLine($"Area calculated to be : {area}");
 				WriteLine($"Actual area: {acc_area}");
 				WriteLine($"Error estimated to be : {pred_err}");

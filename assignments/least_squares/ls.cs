@@ -16,8 +16,8 @@ public static class LS{
 		}
 		(matrix Q, matrix R) = QRGS.decomp(A);
 		vector c = QRGS.solve(Q,R,b);
-		matrix ATA = (A.T)*A;
-		matrix S = QRGS.inverse(ATA);
+		matrix RTR = (R.T)*R;
+		matrix S = QRGS.inverse(RTR);
 		return (c,S);
 	}
 }//class

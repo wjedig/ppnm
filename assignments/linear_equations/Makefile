@@ -3,12 +3,12 @@
 
 MATLIB = ../../matlib
 
-all: main.exe Out.test.txt out.times.data opcount.svg
+all: main.exe Out.txt out.times.data Opcount.svg
 
-opcount.svg: opcount.gpi out.times.data
+Opcount.svg: opcount.gpi out.times.data
 	gnuplot $<
 
-Out.test.txt: main.exe Makefile
+Out.txt: main.exe Makefile
 	>$@
 	mono main.exe -test 1>>$@
 
@@ -29,13 +29,13 @@ out.times.data : main.exe
 	>$@
 	for N in $$(seq 100 100 800); do \
 		time --format "$$N %e" --output $@ --append \
-		mono $< -size:$$N 1>out 2>err ;\
+		mono $< -size:$$N 2>err ;\
 	done
 
 .PHONEY : clean test
 
 clean:
-	$(RM) *.exe *.dll [Oo]ut* log* err* *.data *.log
+	$(RM) *.exe *.dll [Oo]ut* log* err* *.data *.log *.svg
 test: 
 	echo $(RM)
 

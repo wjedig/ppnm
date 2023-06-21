@@ -9,22 +9,22 @@ GENLIST := $(shell find $(MATLIB)/genlist -name '*.cs')
 
 all: ode_test.svg ode_damp.svg ode_planets.svg
 
-ode_test.svg : ode.gpi Out.ode1.data Out.ode2.data
+ode_test.svg : ode.gpi out.ode1.data out.ode2.data
 	gnuplot ode.gpi
 
-ode_damp.svg : damp.gpi Out.ode3.data
+ode_damp.svg : damp.gpi out.ode3.data
 	gnuplot damp.gpi
 
 ode_planets.svg : planets.gpi BData
 	gnuplot planets.gpi
 
-Out.ode1.data: main.exe
+out.ode1.data: main.exe
 	mono main.exe -A1 > $@
 
-Out.ode2.data: main.exe
+out.ode2.data: main.exe
 	mono main.exe -A2 > $@
 
-Out.ode3.data: main.exe
+out.ode3.data: main.exe
 	mono main.exe -A3 > $@
 
 BData: main.exe
@@ -39,7 +39,7 @@ matlib.dll : $(LINALG) $(GENLIST)
 .PHONEY : clean test all BData
 
 clean:
-	$(RM) *.exe *.dll [Oo]ut* log*
+	$(RM) *.exe *.dll [Oo]ut* log* *.svg
 test: 
 	echo $(RM)
 
