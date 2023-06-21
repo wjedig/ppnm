@@ -1,3 +1,13 @@
+NOTE:
+
+The general structure I have used in the homeworks (I have called them assignments) is to 
+have files that are capitalised (e.g. Out.txt) to represent files that are intended for viewing.
+
+Files with lower cases (e.g. out.b.data) are often data filed that are used for plotting.
+
+Likewise, if an output file is specific to a part of the question, it will be called Out.A.txt, Out.B.txt, etc.
+If I felt it made more sense to combine the outputs into a single file, it will simply be called Out.txt
+
  ======================================
 | #  | homework      | A | B | C | Σ   |
  ======================================
