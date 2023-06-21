@@ -1,5 +1,0 @@
-Initial guess:        120         10         10 
-Originally, this was run with (10.0,10.0,10.0), which worked...
-But took a little too long (~45 seconds)
-Parameters found to be:        126       2.09       9.88 
-Minimization took 15993 iterations (174970 backtracking iterations).
