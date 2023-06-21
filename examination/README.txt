@@ -1,6 +1,7 @@
 --- Exam Project 14 ---
 by William Jedig
 
+My evaluation for my score on this exam project is (10/10), as I feel I have completed all the tasks to a high standard.
 
 This project involves computing the Cholesky Decomposition of real symmetric positive-definite matrix, which I will call matrix A.
 
